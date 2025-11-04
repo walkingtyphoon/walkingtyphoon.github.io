@@ -1,23 +1,24 @@
 body {
-    background-color: #000;
-    color: #00ff00;
-    font-family: 'Courier New', monospace;
+    background-color: #0e0e0e;
+    color: #e0e0e0;
+    font-family: "JetBrains Mono", monospace;
+    line-height: 1.6;
+    margin: 2rem auto;
+    max-width: 800px;
+    padding: 1rem;
 }
 
 a {
-    color: #00ffcc;
+    color: #00bcd4;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
 }
 
-code {
-    background-color: #111;
-    color: #0f0;
-    padding: 2px 4px;
-    border-radius: 4px;
-}
-
-pre {
-    background-color: #111;
-    padding: 10px;
-    border-radius: 8px;
-    overflow-x: auto;
+code, pre {
+    background: #1e1e1e;
+    color: #00ffae;
+    padding: 2px 6px;
+    border-radius: 6px;
 }
