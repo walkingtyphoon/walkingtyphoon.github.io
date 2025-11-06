@@ -25,13 +25,16 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential
+          sudo apt-get install -y build-essential libxml2-dev libxslt1-dev zlib1g-dev
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1'
-          bundler-cache: true
+          bundler-cache: false  # 先关闭缓存确保每次全装
+
+      - name: Bundle install with verbose
+        run: bundle install --verbose
 
       - name: Setup Pages
         id: pages
