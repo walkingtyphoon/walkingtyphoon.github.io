@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{{ page.title | default: site.title }}</title>
+    <style>
+        /* 全屏canvas做背景 */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background: #1e1e2f;
+            color: #eee;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #background-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1; /* 背景层 */
+        }
+
+        main {
+            position: relative;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+<canvas id="background-canvas"></canvas>
+
+<main>
+    {{ content }}
+</main>
+
+<script src="{{ '/assets/js/background.js' | relative_url }}"></script>
+</body>
+</html>
