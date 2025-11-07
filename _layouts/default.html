@@ -40,7 +40,59 @@
     {{ content }}
 </main>
 
-<!-- ⚠️ 必须加 defer，否则脚本执行太早找不到 canvas -->
-<script src="{{ '/assets/js/background.js' | relative_url }}" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById("background-canvas");
+        const ctx = canvas.getContext("2d");
+        let width, height;
+        let xspacing = 6, amplitude = 40, period = 300, dx, yvalues = [], theta = 0;
+
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            dx = (2 * Math.PI / period) * xspacing;
+            yvalues = new Array(Math.floor(width / xspacing));
+        }
+
+        window.addEventListener("resize", resize);
+        resize();
+
+        function calcWave() {
+            theta += 0.025;
+            let x = theta;
+            for (let i = 0; i < yvalues.length; i++) {
+                yvalues[i] = Math.sin(x) * amplitude + Math.sin(x * 1.5) * (amplitude * 0.3);
+                x += dx;
+            }
+        }
+
+        function renderWave() {
+            ctx.clearRect(0, 0, width, height);
+            const gradient = ctx.createLinearGradient(0, 0, 0, height);
+            gradient.addColorStop(0, "#0b0b15");
+            gradient.addColorStop(1, "#141428");
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+            ctx.beginPath();
+            ctx.moveTo(0, height / 2 + yvalues[0]);
+            for (let i = 1; i < yvalues.length; i++) {
+                ctx.lineTo(i * xspacing, height / 2 + yvalues[i]);
+            }
+            ctx.strokeStyle = "rgba(0, 180, 255, 0.7)";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+
+        function animate() {
+            calcWave();
+            renderWave();
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    });
+</script>
 </body>
 </html>
