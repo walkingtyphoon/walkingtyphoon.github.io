@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ page.title | default: "行走的台风" }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/main.css?v=' | append: site.time | relative_url }}">
+</head>
+
+<body>
+<canvas id="background-canvas"></canvas>
+
+<main class="center-screen">
+    {{ content }}
+</main>
+
+<script src="{{ '/assets/js/background.js?v=' | append: site.time | relative_url }}"></script>
+</body>
+</html>
