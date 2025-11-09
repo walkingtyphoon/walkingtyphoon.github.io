@@ -3,67 +3,99 @@ layout: default
 ---
 
 <article class="post-container">
-  <header class="post-header">
-    <h1 class="post-title">{{ page.title }}</h1>
-    <p class="post-date">{{ page.date | date: "%Y-%m-%d" }}</p>
-  </header>
+    <header class="post-header">
+        <h1 class="post-title">{{ page.title }}</h1>
+        <p class="post-date">{{ page.date | date: "%Y-%m-%d" }}</p>
+    </header>
 
-  <section class="post-content">
-    {{ content }}
-  </section>
+    <section class="post-content">
+        {{ content }}
+    </section>
 
-  <footer class="post-footer">
-    <a href="{{ '/' | relative_url }}" class="back-home">← 返回首页</a>
-  </footer>
+    <footer class="post-footer">
+        <a href="{{ '/' | relative_url }}" class="back-home">← 返回首页</a>
+    </footer>
 </article>
 
 <style>
-.post-container {
-  position: relative;
-  z-index: 1;
-  max-width: 800px;
-  margin: 80px auto;
-  padding: 40px;
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  line-height: 1.7;
-  font-size: 1.05rem;
-}
+    :root{
+        --card-bg: rgba(255,255,255,0.94);
+        --text: #111;
+        --muted: #666;
+        --link: #007acc;
+        --link-hover: #005f99;
+        --max-width: 840px;
+        --radius: 14px;
+        --shadow: 0 6px 30px rgba(15,20,30,0.08);
+    }
 
-.post-header {
-  text-align: center;
-  margin-bottom: 40px;
-}
+    /* 如果用户系统偏好是暗色，这里自动切换颜色变量 */
+    @media (prefers-color-scheme: dark){
+        :root{
+            --card-bg: rgba(18,18,20,0.78);
+            --text: #ececec;
+            --muted: #aeb3b8;
+            --link: #66b2ff;
+            --link-hover: #9ec8ff;
+            --shadow: 0 8px 36px rgba(0,0,0,0.45);
+        }
+    }
 
-.post-title {
-  font-size: 2rem;
-  font-weight: 600;
-  margin: 0;
-}
+    /* 容器样式 */
+    .post-container {
+        position: relative;
+        z-index: 1;
+        max-width: var(--max-width);
+        margin: 80px auto;
+        padding: 42px;
+        background: var(--card-bg);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        color: var(--text);
+        line-height: 1.75;
+        font-size: 1.03rem;
+        word-break: break-word;
+        -webkit-font-smoothing: antialiased;
+        backdrop-filter: blur(6px); /* 玻璃模糊感（若支持） */
+    }
 
-.post-date {
-  color: #888;
-  font-size: 0.9rem;
-}
+    /* 头部 */
+    .post-header { text-align: center; margin-bottom: 34px; }
+    .post-title { font-size: 2rem; font-weight: 600; margin: 0; }
+    .post-date { color: var(--muted); font-size: 0.92rem; margin-top: 8px; }
 
-.post-content p {
-  margin-bottom: 1em;
-}
+    /* 正文基础排版 */
+    .post-content h2 { margin-top: 1.6em; margin-bottom: .6em; }
+    .post-content p { margin-bottom: 1em; color: var(--text); }
+    .post-content pre, .post-content code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+        background: rgba(0,0,0,0.04);
+        padding: 8px 10px;
+        border-radius: 6px;
+        overflow-x: auto;
+    }
+    /* 在暗色模式下微调 code 背景 */
+    @media (prefers-color-scheme: dark){
+        .post-content pre, .post-content code { background: rgba(255,255,255,0.04); }
+    }
 
-.post-footer {
-  text-align: center;
-  margin-top: 50px;
-}
+    .post-footer { text-align: center; margin-top: 46px; }
+    .back-home {
+        text-decoration: none;
+        color: var(--link);
+        font-weight: 500;
+        transition: color .18s ease;
+    }
+    .back-home:hover { color: var(--link-hover); }
 
-.back-home {
-  text-decoration: none;
-  color: #007acc;
-  font-weight: 500;
-  transition: color 0.2s;
-}
+    /* 链接与列表等 */
+    .post-content a { color: var(--link); text-decoration: underline; }
+    .post-content ul, .post-content ol { margin-left: 1.2rem; padding-left: 0.2rem; }
+    .post-content img { max-width: 100%; border-radius: 8px; display:block; margin: 1em auto; }
 
-.back-home:hover {
-  color: #005f99;
-}
+    /* 响应式微调 */
+    @media (max-width: 640px){
+        .post-container { margin: 60px 16px; padding: 28px; }
+        .post-title { font-size: 1.6rem; }
+    }
 </style>
