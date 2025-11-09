@@ -1,44 +1,53 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>{{ page.title | default: site.title }}</title>
-  <meta name="description" content="{{ page.description | default: site.description | default: '理性与美感共存的理工风博客' }}">
-  <link rel="stylesheet" href="{{ '/assets/css/main.css?v=' | append: site.time | relative_url }}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ page.title | default: site.title }}</title>
+    <meta name="description"
+          content="{{ page.description | default: site.description | default: '理性与美感共存的理工风博客' }}">
+    <link rel="stylesheet" href="{{ '/assets/css/main.css?v=' | append: site.time | relative_url }}">
+
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <meta name="keywords" content="C++, Qt, 读书, 技术, 台风">
+    <meta property="og:title" content="{{ page.title | default: site.title }}">
+    <meta property="og:description" content="{{ page.description | default: site.description }}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:type" content="website">
 </head>
 <body>
-  <canvas id="background-canvas" aria-hidden="true"></canvas>
+<canvas id="background-canvas" aria-hidden="true"></canvas>
 
-  <div class="site-shell">
+<div class="site-shell">
     <header class="site-header" role="banner">
-      <div class="header-inner">
-        <div class="brand">
-          <a href="{{ '/' | relative_url }}" class="brand-link">
-            <span class="brand-title">{{ site.title | default: "行走的台风" }}</span>
-            <span class="brand-sub">理性、抽象、但不失温度</span>
-          </a>
+        <div class="header-inner">
+            <div class="brand">
+                <a href="{{ '/' | relative_url }}" class="brand-link">
+                    <span class="brand-title">{{ site.title | default: "行走的台风" }}</span>
+                    <span class="brand-sub">理性、抽象、但不失温度</span>
+                </a>
+            </div>
+            <nav class="site-nav" role="navigation" aria-label="主导航">
+                <a href="{{ '/' | relative_url }}">首页</a>
+                <a href="{{ '/projects/' | relative_url }}">项目</a>
+                <a href="{{ '/notes/' | relative_url }}">笔记</a>
+                <a href="{{ '/about/' | relative_url }}">关于</a>
+            </nav>
         </div>
-        <nav class="site-nav" role="navigation" aria-label="主导航">
-          <a href="{{ '/' | relative_url }}">首页</a>
-          <a href="{{ '/projects/' | relative_url }}">项目</a>
-          <a href="{{ '/notes/' | relative_url }}">笔记</a>
-          <a href="{{ '/about/' | relative_url }}">关于</a>
-        </nav>
-      </div>
     </header>
 
     <main class="site-main" role="main">
-      <article class="page-content">
-        {{ content }}
-      </article>
+        <article class="page-content">
+            {{ content }}
+        </article>
     </main>
 
     <footer class="site-footer" role="contentinfo">
-      <div>Made with ♥ · {{ "now" | date: "%Y" }} · <a href="https://github.com/{{ site.github_repo }}" target="_blank" rel="noopener">Source</a></div>
+        <div>Made with ♥ · {{ "now" | date: "%Y" }} · <a href="https://github.com/{{ site.github_repo }}"
+                                                         target="_blank" rel="noopener">Source</a></div>
     </footer>
-  </div>
+</div>
 
-  <script src="/assets/js/background.js"></script>
+<script src="/assets/js/background.js"></script>
 </body>
 </html>
