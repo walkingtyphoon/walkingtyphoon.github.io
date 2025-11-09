@@ -27,3 +27,30 @@ title: "欢迎来到台风的博客"
     {% endfor %}
   </ul>
 </div>
+
+<div id="site-info" style="position:relative;z-index:1;text-align:center;margin-top:60px;color:#ddd;font-size:0.9rem;">
+  <p>👁️ 累计访问：<span id="busuanzi_value_site_pv">加载中...</span> 次</p>
+  <p>⏱️ 博客已运行：<span id="runtime">加载中...</span></p>
+</div>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script>
+// ---------- 博客运行时间 ----------
+const startTime = new Date('2025-11-01T00:00:00'); // ← 修改成你的上线日期
+function updateRuntime() {
+  const now = new Date();
+  let diff = now - startTime;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  diff -= days * 1000 * 60 * 60 * 24;
+  const hours = Math.floor(diff / (1000 * 60 * 60));
+  diff -= hours * 1000 * 60 * 60;
+  const minutes = Math.floor(diff / (1000 * 60));
+
+  document.getElementById('runtime').textContent =
+    `${days} 天 ${hours} 小时 ${minutes} 分钟`;
+}
+updateRuntime();
+setInterval(updateRuntime, 60000);
+</script>
