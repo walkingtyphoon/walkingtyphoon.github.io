@@ -37,7 +37,7 @@ title: "欢迎来到台风的博客"
 
 <script>
 // ---------- 博客运行时间 ----------
-const startTime = new Date('2025-11-01T00:00:00'); // ← 修改成你的上线日期
+const startTime = new Date('2025-11-08T00:00:00'); // ← 修改成你的上线日期
 function updateRuntime() {
   const now = new Date();
   let diff = now - startTime;
