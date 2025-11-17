@@ -54,3 +54,20 @@ function updateRuntime() {
 updateRuntime();
 setInterval(updateRuntime, 60000);
 </script>
+
+<div style="margin:60px auto; max-width:420px; text-align:center; padding:20px; background:rgba(0,0,0,0.35); border-radius:12px; backdrop-filter: blur(6px);">
+  <h3 style="color:#fff; margin-bottom:16px;">📬 订阅最新更新</h3>
+
+  <form action="https://api.follow.it/subscription-form/bmxSTXZUMzFDWHJQeE84V0dOWk5TUWs4VUd0MHJKckQ1NHR6V0IxQWpYbTVLTWFBNWFJV1ArKzZwWmEvT2ZlbTJadHJzaXFIZWM2VXBpQ3lBVmZSNTBWU1hkdlI3L0crclBuTjNwaXR1ZUVqYXB1Q1kvQnZPSXBhWTY1Ry9KYzZ8MlladVJRQS84MVlRY01ndDZqd21LSmwrREhveDJRZjhUR1ByWmFHd0lVVT0=/8" method="post" target="_blank" style="display:flex; flex-direction:column; gap:12px;">
+
+    <input type="email" name="email" required placeholder="输入邮箱订阅更新…" 
+           style="padding:12px 14px; border-radius:8px; background:#111; border:1px solid #555; color:#eee; font-size:1rem;">
+    
+    <button type="submit" 
+            style="padding:12px 16px; border-radius:8px; background:#4ea1ff; color:white; border:none; font-size:1rem; cursor:pointer;">
+      订阅
+    </button>
+  </form>
+
+  <p style="margin-top:10px; font-size:0.85rem; color:#bbb;">新文章发布后将自动发送邮件</p>
+</div>
