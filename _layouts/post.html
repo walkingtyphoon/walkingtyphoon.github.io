@@ -18,26 +18,26 @@ layout: default
 </article>
 
 <style>
-    :root{
-        --card-bg: rgba(255,255,255,0.94);
+    :root {
+        --card-bg: rgba(255, 255, 255, 0.94);
         --text: #111;
         --muted: #666;
         --link: #007acc;
         --link-hover: #005f99;
         --max-width: 840px;
         --radius: 14px;
-        --shadow: 0 6px 30px rgba(15,20,30,0.08);
+        --shadow: 0 6px 30px rgba(15, 20, 30, 0.08);
     }
 
     /* 如果用户系统偏好是暗色，这里自动切换颜色变量 */
-    @media (prefers-color-scheme: dark){
-        :root{
-            --card-bg: rgba(18,18,20,0.78);
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --card-bg: rgba(18, 18, 20, 0.78);
             --text: #ececec;
             --muted: #aeb3b8;
             --link: #66b2ff;
             --link-hover: #9ec8ff;
-            --shadow: 0 8px 36px rgba(0,0,0,0.45);
+            --shadow: 0 8px 36px rgba(0, 0, 0, 0.45);
         }
     }
 
@@ -60,42 +60,104 @@ layout: default
     }
 
     /* 头部 */
-    .post-header { text-align: center; margin-bottom: 34px; }
-    .post-title { font-size: 2rem; font-weight: 600; margin: 0; }
-    .post-date { color: var(--muted); font-size: 0.92rem; margin-top: 8px; }
+    .post-header {
+        text-align: center;
+        margin-bottom: 34px;
+    }
+
+    .post-title {
+        font-size: 2rem;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .post-date {
+        color: var(--muted);
+        font-size: 0.92rem;
+        margin-top: 8px;
+    }
 
     /* 正文基础排版 */
-    .post-content h2 { margin-top: 1.6em; margin-bottom: .6em; }
-    .post-content p { margin-bottom: 1em; color: var(--text); }
+    .post-content h2 {
+        margin-top: 1.6em;
+        margin-bottom: .6em;
+    }
+
+    .post-content p {
+        margin-bottom: 1em;
+        color: var(--text);
+    }
+
     .post-content pre, .post-content code {
         font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
-        background: rgba(0,0,0,0.04);
+        background: rgba(0, 0, 0, 0.04);
         padding: 8px 10px;
         border-radius: 6px;
         overflow-x: auto;
     }
+
     /* 在暗色模式下微调 code 背景 */
-    @media (prefers-color-scheme: dark){
-        .post-content pre, .post-content code { background: rgba(255,255,255,0.04); }
+    @media (prefers-color-scheme: dark) {
+        .post-content pre, .post-content code {
+            background: rgba(255, 255, 255, 0.04);
+        }
     }
 
-    .post-footer { text-align: center; margin-top: 46px; }
+    .post-footer {
+        text-align: center;
+        margin-top: 46px;
+    }
+
     .back-home {
         text-decoration: none;
         color: var(--link);
         font-weight: 500;
         transition: color .18s ease;
     }
-    .back-home:hover { color: var(--link-hover); }
+
+    .back-home:hover {
+        color: var(--link-hover);
+    }
 
     /* 链接与列表等 */
-    .post-content a { color: var(--link); text-decoration: underline; }
-    .post-content ul, .post-content ol { margin-left: 1.2rem; padding-left: 0.2rem; }
-    .post-content img { max-width: 100%; border-radius: 8px; display:block; margin: 1em auto; }
+    .post-content a {
+        color: var(--link);
+        text-decoration: underline;
+    }
+
+    .post-content ul, .post-content ol {
+        margin-left: 1.2rem;
+        padding-left: 0.2rem;
+    }
+
+    .post-content img {
+        max-width: 100%;
+        border-radius: 8px;
+        display: block;
+        margin: 1em auto;
+    }
 
     /* 响应式微调 */
-    @media (max-width: 640px){
-        .post-container { margin: 60px 16px; padding: 28px; }
-        .post-title { font-size: 1.6rem; }
+    @media (max-width: 640px) {
+        .post-container {
+            margin: 60px 16px;
+            padding: 28px;
+        }
+
+        .post-title {
+            font-size: 1.6rem;
+        }
     }
 </style>
+
+<script src="https://giscus.app/client.js"
+        data-repo="walkingtyphoon/walkingtyphoon.github.io"
+        data-repo-id="xxxx"
+        data-category="General"
+        data-category-id="xxxx"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-theme="dark"
+        crossorigin="anonymous"
+        async>
+</script>
