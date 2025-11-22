@@ -3,14 +3,71 @@ layout: default
 ---
 
 <article class="post-container">
+
     <header class="post-header">
         <h1 class="post-title">{{ page.title }}</h1>
         <p class="post-date">{{ page.date | date: "%Y-%m-%d" }}</p>
     </header>
 
+    <!-- 内容区域 -->
     <section class="post-content">
         {{ content }}
     </section>
+
+    <!-- 自动分页脚本（你不需要做任何事，文章越长会自动分页） -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const content = document.querySelector(".post-content");
+        const originalHTML = content.innerHTML;
+
+        const PAGE_HEIGHT = 1400; // 每页高度(px)，可根据你的审美调整
+
+        const pages = [];
+        let tempDiv = document.createElement("div");
+        tempDiv.style.position = "absolute";
+        tempDiv.style.visibility = "hidden";
+        tempDiv.style.width = content.clientWidth + "px";
+        document.body.appendChild(tempDiv);
+
+        // 根据高度自动分页
+        originalHTML
+            .split(/(?=<h1>|<h2>|<h3>|<p>|<pre>|<ul>|<ol>|<img)/)
+            .forEach(chunk => {
+                tempDiv.innerHTML += chunk;
+                if (tempDiv.offsetHeight > PAGE_HEIGHT) {
+                    pages.push(tempDiv.innerHTML);
+                    tempDiv.innerHTML = chunk;
+                }
+            });
+
+        if (tempDiv.innerHTML.trim().length > 0) {
+            pages.push(tempDiv.innerHTML);
+        }
+        document.body.removeChild(tempDiv);
+
+        // 当前页
+        const url = new URL(window.location.href);
+        let page = parseInt(url.searchParams.get("page") || "1");
+        if (page < 1) page = 1;
+        if (page > pages.length) page = pages.length;
+
+        // 显示当前页内容
+        content.innerHTML = pages[page - 1];
+
+        // 分页导航
+        if (pages.length > 1) {
+            const nav = document.createElement("div");
+            nav.className = "inner-pagination";
+            nav.innerHTML = `
+                ${page > 1 ? `<a href="?page=${page - 1}">← 上一页</a>` : ""}
+                <span>第 ${page} 页 / 共 ${pages.length} 页</span>
+                ${page < pages.length ? `<a href="?page=${page + 1}">下一页 →</a>` : ""}
+            `;
+            content.insertAdjacentElement("afterend", nav);
+        }
+    });
+    </script>
+
     <script src="https://giscus.app/client.js"
             data-repo="walkingtyphoon/walkingtyphoon.github.io"
             data-repo-id="R_kgDOQXY7WQ"
@@ -27,9 +84,11 @@ layout: default
             crossorigin="anonymous"
             async>
     </script>
+
     <footer class="post-footer">
         <a href="{{ '/' | relative_url }}" class="back-home">← 返回首页</a>
     </footer>
+
 </article>
 
 <style>
@@ -44,7 +103,6 @@ layout: default
         --shadow: 0 6px 30px rgba(15, 20, 30, 0.08);
     }
 
-    /* 如果用户系统偏好是暗色，这里自动切换颜色变量 */
     @media (prefers-color-scheme: dark) {
         :root {
             --card-bg: rgba(18, 18, 20, 0.78);
@@ -56,10 +114,8 @@ layout: default
         }
     }
 
-    /* 容器样式 */
     .post-container {
         position: relative;
-        z-index: 1;
         max-width: var(--max-width);
         margin: 80px auto;
         padding: 42px;
@@ -70,58 +126,30 @@ layout: default
         line-height: 1.75;
         font-size: 1.03rem;
         word-break: break-word;
-        -webkit-font-smoothing: antialiased;
-        backdrop-filter: blur(6px); /* 玻璃模糊感（若支持） */
+        backdrop-filter: blur(6px);
     }
 
-    /* 头部 */
-    .post-header {
-        text-align: center;
-        margin-bottom: 34px;
-    }
+    .post-header { text-align: center; margin-bottom: 34px; }
+    .post-title { font-size: 2rem; font-weight: 600; margin: 0; }
+    .post-date { color: var(--muted); font-size: 0.92rem; margin-top: 8px; }
 
-    .post-title {
-        font-size: 2rem;
-        font-weight: 600;
-        margin: 0;
-    }
-
-    .post-date {
-        color: var(--muted);
-        font-size: 0.92rem;
-        margin-top: 8px;
-    }
-
-    /* 正文基础排版 */
-    .post-content h2 {
-        margin-top: 1.6em;
-        margin-bottom: .6em;
-    }
-
-    .post-content p {
-        margin-bottom: 1em;
-        color: var(--text);
-    }
+    .post-content h2 { margin-top: 1.6em; margin-bottom: .6em; }
+    .post-content p { margin-bottom: 1em; color: var(--text); }
 
     .post-content pre, .post-content code {
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
         background: rgba(0, 0, 0, 0.04);
         padding: 8px 10px;
         border-radius: 6px;
         overflow-x: auto;
     }
 
-    /* 在暗色模式下微调 code 背景 */
     @media (prefers-color-scheme: dark) {
         .post-content pre, .post-content code {
             background: rgba(255, 255, 255, 0.04);
         }
     }
 
-    .post-footer {
-        text-align: center;
-        margin-top: 46px;
-    }
+    .post-footer { text-align: center; margin-top: 46px; }
 
     .back-home {
         text-decoration: none;
@@ -129,16 +157,9 @@ layout: default
         font-weight: 500;
         transition: color .18s ease;
     }
+    .back-home:hover { color: var(--link-hover); }
 
-    .back-home:hover {
-        color: var(--link-hover);
-    }
-
-    /* 链接与列表等 */
-    .post-content a {
-        color: var(--link);
-        text-decoration: underline;
-    }
+    .post-content a { color: var(--link); text-decoration: underline; }
 
     .post-content ul, .post-content ol {
         margin-left: 1.2rem;
@@ -152,16 +173,27 @@ layout: default
         margin: 1em auto;
     }
 
-    /* 响应式微调 */
     @media (max-width: 640px) {
-        .post-container {
-            margin: 60px 16px;
-            padding: 28px;
-        }
+        .post-container { margin: 60px 16px; padding: 28px; }
+        .post-title { font-size: 1.6rem; }
+    }
 
-        .post-title {
-            font-size: 1.6rem;
-        }
+    /* 自动分页导航样式 */
+    .inner-pagination {
+        margin-top: 32px;
+        text-align: center;
+        font-size: 0.95rem;
+        color: var(--muted);
+    }
+
+    .inner-pagination a {
+        margin: 0 12px;
+        color: var(--link);
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .inner-pagination a:hover {
+        color: var(--link-hover);
     }
 </style>
-
