@@ -28,8 +28,7 @@ jobs:
             # 创建目录
             mkdir -p categories/$category
           
-            # 写分类页面 index.html
-            cat > categories/$category/index.html <<EOF
+cat > categories/$category/index.html <<EOF
 ---
 layout: category
 category: $category
